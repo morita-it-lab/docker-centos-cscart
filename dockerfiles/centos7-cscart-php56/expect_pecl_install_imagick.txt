@@ -1,0 +1,5 @@
+set timeout -1
+spawn pecl install imagick
+expect "Please provide the prefix of Imagemagick installation"
+send "\r"
+expect "You should add \"extension=imagick.so\" to php.ini"

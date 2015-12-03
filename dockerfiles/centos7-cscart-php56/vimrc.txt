@@ -1,0 +1,12 @@
+syntax enable
+set number
+set tabstop=4
+set shiftwidth=4
+set noexpandtab
+set softtabstop=0
+set list
+set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
+set incsearch
+set hlsearch
+set ignorecase
+set hidden
