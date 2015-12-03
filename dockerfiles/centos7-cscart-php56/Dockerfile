@@ -43,7 +43,8 @@ VOLUME /var/www/html
 WORKDIR /var/www/html
 
 # default php
-RUN echo "<?php phpinfo(); ?>" > /var/www/html/index.php
+# RUN echo "<?php phpinfo(); ?>" > /var/www/html/index.php
+ADD index.php /var/www/html/index.php
 
 # ----- httpd settings
 ADD docroot.conf /etc/httpd/conf.d/docroot.conf
