@@ -9,6 +9,7 @@ FROM centos:7
 MAINTAINER MASASHI MORITA <morita@mrita-it-lab.jp>
 
 # ----- Update yum
+RUN yum clean all
 RUN yum -y update
 RUN yum -y install httpd
 
@@ -22,9 +23,10 @@ RUN yum -y install expect
 
 # php v5.6
 RUN yum -y install epel-release
+RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN cd /etc/yum.repos.d
 RUN wget http://rpms.famillecollet.com/enterprise/remi.repo
-RUN yum -y --enablerepo=remi,remi-php56 install php php-common php-devel php-pear
+RUN yum -y install --enablerepo=remi,remi-php56 php php-common php-devel php-pear php-mbstring php-pdo php-gd
 
 # mysql
 RUN yum -y --enablerepo=remi,remi-php56 install php-mysql
@@ -43,7 +45,6 @@ VOLUME /var/www/html
 WORKDIR /var/www/html
 
 # default php
-# RUN echo "<?php phpinfo(); ?>" > /var/www/html/index.php
 ADD index.php /var/www/html/index.php
 
 # ----- httpd settings
@@ -52,9 +53,8 @@ ADD docroot.conf /etc/httpd/conf.d/docroot.conf
 # ----- vim settings
 ADD vimrc.txt /root/.vimrc
 
-# http port
+# http and https port
 EXPOSE 80
-# https port
 EXPOSE 443
 
 ADD run-httpd.sh /run-httpd.sh
