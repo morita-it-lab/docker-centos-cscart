@@ -11,7 +11,11 @@ MAINTAINER MASASHI MORITA <morita@mrita-it-lab.jp>
 # ----- Update yum
 RUN yum clean all
 RUN yum -y update
+
+# ----- httpd
 RUN yum -y install httpd
+RUN yum -y install mod_ssl
+RUN yum -y install openssl
 
 # ----- Common utilities
 RUN yum -y install vim
@@ -27,6 +31,9 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN cd /etc/yum.repos.d
 RUN wget http://rpms.famillecollet.com/enterprise/remi.repo
 RUN yum -y install --enablerepo=remi,remi-php56 php php-common php-devel php-pear php-mbstring php-pdo php-gd
+
+# ----- php
+RUN yum -y install php-mbstring
 
 # mysql
 RUN yum -y --enablerepo=remi,remi-php56 install php-mysql
