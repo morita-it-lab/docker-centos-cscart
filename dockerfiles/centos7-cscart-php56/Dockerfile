@@ -17,6 +17,9 @@ RUN yum -y install httpd
 RUN yum -y install mod_ssl
 RUN yum -y install openssl
 
+RUN usermod -u 1000 apache
+RUN groupmod -g 1000 apache
+
 # ----- Common utilities
 RUN yum -y install vim
 RUN yum -y install unzip
