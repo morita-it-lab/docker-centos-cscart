@@ -67,7 +67,7 @@ ADD vimrc.txt /root/.vimrc
 EXPOSE 80
 EXPOSE 443
 
-ADD run-httpd.sh /run-httpd.sh
-RUN chmod -v +x /run-httpd.sh
+ADD start.sh /start.sh
+RUN chmod -v +x /start.sh
 
-CMD ["/run-httpd.sh"]
+CMD ["/start.sh"]
