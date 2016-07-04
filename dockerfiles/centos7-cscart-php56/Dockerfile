@@ -20,6 +20,9 @@ RUN yum -y install openssl
 RUN usermod -u 1000 apache
 RUN groupmod -g 1000 apache
 
+ENV SETUP_HTTPD_CONF_NAME setup.conf
+ENV SERVER_NAME localhost:80
+
 # ----- Common utilities
 RUN yum -y install vim
 RUN yum -y install unzip

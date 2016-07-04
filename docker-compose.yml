@@ -1,0 +1,9 @@
+version: '2'
+services:
+    cscart:
+        container_name: cscart
+        build: ./dockerfiles/centos7-cscart-php56
+        environment:
+            SETUP_HTTPD_CONF_NAME: setup.conf
+            SERVER_NAME: www.example.com:80
+        tty: true
