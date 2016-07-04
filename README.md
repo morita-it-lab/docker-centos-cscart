@@ -24,6 +24,20 @@ name of the configuration file.
 
 httpd `ServerName` config.
 
+### STDOUT_ERROR_LOG
+
+* default : `TRUE`
+* `TRUE` or `FALSE`
+
+add `ErrorLog /dev/stdout` to config.
+
+### STDOUT_CUSTOM_LOG
+
+* default : `TRUE`
+* `TRUE` or `FALSE`
+
+add `CustomLog /dev/stdout combined` to config.
+
 ## Run
 
 ```
@@ -43,18 +57,21 @@ version: '2'
 services:
     cscart:
         container_name: cscart
+        # build: ./dockerfiles/centos7-cscart-php56
         image: reneice/docker-centos-cscart
         environment:
             SERVER_NAME: www.example.com:80
+            # STDOUT_ERROR_LOG: "FALSE"
+            STDOUT_CUSTOM_LOG: "FALSE"
         ports:
-            - 80:80
+            - 8101:80
         volumes:
             - ./docroot:/var/www/html
         links:
             - db:db
         tty: true
     db:
-        container_name: mariadb
+        container_name: cscart_mariadb
         image: mariadb
         ports:
             - 3306:3306
@@ -62,6 +79,7 @@ services:
             - ./mariadb/other_data:/other_data
             - ./mariadb/database:/var/lib/mysql
         environment:
+            MYSQL_ROOT_PASSWORD: cscart
             MYSQL_PASSWORD: cscart
             MYSQL_USER: cscart
             MYSQL_DB: cscart
