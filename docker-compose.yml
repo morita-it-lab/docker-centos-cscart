@@ -6,8 +6,8 @@ services:
         # image: reneice/docker-centos-cscart
         environment:
             SERVER_NAME: www.example.com:80
-            STDOUT_ERROR_LOG: "FALSE"
-            STDOUT_CUSTOM_LOG: "FALSE"
+            # STDOUT_ERROR_LOG: "FALSE"
+            # STDOUT_CUSTOM_LOG: "FALSE"
         ports:
             - 8101:80
         volumes:
