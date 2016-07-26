@@ -8,7 +8,9 @@ This container is CS-Cart environment.
 ## Requier
 
 * CS-Cart files. Please official download.
-* link MySQL or MariaDB container.
+	* https://www.cs-cart.com/
+	* If japanese : http://cs-cart.jp/
+* Link MySQL or MariaDB container.
 
 ## Environment
 
@@ -50,18 +52,18 @@ docker run -it \
 
 ## Example
 
-### docker-compose
+### docker-compose.yml
 
 ```yml
 version: '2'
 services:
     cscart:
-        container_name: cscart
+        container_name: my-cscart
         # build: ./dockerfiles/centos7-cscart-php56
         image: reneice/docker-centos-cscart
         environment:
             SERVER_NAME: www.example.com:80
-            # STDOUT_ERROR_LOG: "FALSE"
+            STDOUT_ERROR_LOG: "TRUE"
             STDOUT_CUSTOM_LOG: "FALSE"
         ports:
             - 8101:80
@@ -71,13 +73,20 @@ services:
             - db:db
         tty: true
     db:
-        container_name: cscart_mariadb
+        container_name: my-cscart-mariadb
         image: mariadb
         ports:
             - 3306:3306
         volumes:
+
+            # I used to because of mysqldump or exec sql files.
+            # If do not use please delete.
             - ./mariadb/other_data:/other_data
-            - ./mariadb/database:/var/lib/mysql
+
+            # If Mac of Windows is Permission Error occurs.
+            # Sorry. I still do not know the solution.
+            # - ./mariadb/database:/var/lib/mysql
+
         environment:
             MYSQL_ROOT_PASSWORD: cscart
             MYSQL_PASSWORD: cscart
