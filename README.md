@@ -89,9 +89,9 @@ services:
 
         environment:
             MYSQL_ROOT_PASSWORD: cscart
-            MYSQL_PASSWORD: cscart
+            MYSQL_DATABASE: cscart
             MYSQL_USER: cscart
-            MYSQL_DB: cscart
+            MYSQL_PASSWORD: cscart
 ```
 
 ### Run
